@@ -8,14 +8,23 @@ import { PdfService } from './pdf';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  
+
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
 export class AppComponent {
   textContent: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
+
+  get wordCount(): number {
+    // Se o texto estiver vazio ou só tiver espaços em branco, retorna 0
+    if (!this.textContent.trim()) {
+      return 0;
+    }
+    // Caso contrário, divide o texto por espaços e retorna o número de palavras
+    return this.textContent.trim().split(/\s+/).length;
+  }
 
   constructor(private pdfService: PdfService) {}
 
@@ -44,7 +53,11 @@ export class AppComponent {
         console.error('Erro ao gerar o PDF', err);
         this.errorMessage = 'Ocorreu um erro ao gerar o PDF.';
         this.isLoading = false;
-      }
+      },
     });
+  }
+  clearText(): void {
+    this.textContent = '';
+    this.errorMessage = '';
   }
 }

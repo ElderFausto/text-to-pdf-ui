@@ -4,15 +4,30 @@
 
   <textarea
     [(ngModel)]="textContent"
-    placeholder="Digite seu texto aqui..."
+    placeholder="Digite ou cole o seu texto aqui..."
     rows="15"
-    class="text-area">
+    class="text-area"
+  >
   </textarea>
+  <div class="stats-container">
+    <span
+      >Caracteres: <strong>{{ textContent.length }}</strong></span
+    >
+    <span class="separator">|</span>
+    <span
+      >Palavras: <strong>{{ wordCount }}</strong></span
+    >
+  </div>
 
-  <button (click)="generatePdf()" [disabled]="isLoading" class="generate-button">
-    <span *ngIf="!isLoading">Gerar PDF</span>
-    <span *ngIf="isLoading">Gerando...</span>
-  </button>
+  <div class="button-group">
+    <button (click)="generatePdf()" [disabled]="isLoading" class="generate-button">
+      <span *ngIf="!isLoading">Gerar PDF</span>
+      <span *ngIf="isLoading">Gerando...</span>
+    </button>
+    <button (click)="clearText()" class="clear-button">
+      <i class="fa-solid fa-trash"></i>&nbsp; Limpar Texto
+    </button>
+  </div>
 
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
