@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PdfService {
-  // URL backend 
-  private apiUrl = 'https://elder-pdf-api-docker.onrender.com';
+  // URL backend local
+  private apiUrl = 'http://localhost:8080/api/pdf/generate';
 
   constructor(private http: HttpClient) { }
 
