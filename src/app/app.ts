@@ -13,7 +13,7 @@ import { PdfService } from './pdf';
   styleUrls: ['./app.css']
 })
 export class AppComponent {
-  textContent: string = 'Digite seu texto aqui...';
+  textContent: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
 
