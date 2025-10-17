@@ -11,7 +11,7 @@ export class PdfService {
   // private apiUrl = 'http://localhost:8080/api/pdf/generate';
 
   // URL deployada no AWS Elastic Beanstalk
-  private apiUrl = `${environment.apiUrl}/pdf/generate`;
+  private apiUrl = `${environment.apiUrl}/api/pdf/generate`;
 
   constructor(private http: HttpClient) {}
 
