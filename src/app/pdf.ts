@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class PdfService {
   // URL backend local
   // private apiUrl = 'http://localhost:8080/api/pdf/generate';
@@ -15,10 +16,17 @@ export class PdfService {
 
   constructor(private http: HttpClient) {}
 
-  generatePdf(text: string): Observable<Blob> {
-    return this.http.post(this.apiUrl, text, {
-      headers: { 'Content-Type': 'text/plain' },
-      responseType: 'blob',
+  generatePdf(htmlContent: string): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'text/html', // Mudamos para text/html no passo anterior
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+
+    return this.http.post(this.apiUrl, htmlContent, {
+      headers: headers, 
+      responseType: 'blob'
     });
   }
 }
